@@ -12,10 +12,11 @@ import UserRoute from '../../middlewares/user';
 import Spinner from '../../components/Spinner/Spinner';
 import useAuth from '../../hooks/useAuth';
 import RouteNames from '../../constants/routeNames';
+import UnknownRoute from '../../middlewares/unknown';
+import Unknown from '../404/404';
 
 const Navbar = () => {
-
-    // Дістаємо з контексту функцію віходу з облікового запису.  
+ 
     const {authAttempted, user, signout} = useAuth();
 
     return (
@@ -61,6 +62,7 @@ const Navbar = () => {
                 <UserRoute path={RouteNames.employees} component={Employee} />
                 <GuestRoute path={RouteNames.signin} component={Signin} />
                 <GuestRoute path={RouteNames.signup} component={Signup} />
+                <UnknownRoute component={Unknown}/>
             </Switch>
         </Router>
     );
