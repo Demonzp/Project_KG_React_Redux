@@ -1,27 +1,24 @@
-// import axios from 'axios'; // Потрібно розкоментувати для VARIANT 2.
-
 import React, { useState, useEffect } from 'react';
 import { Button, Table } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { employeeSex } from '../../constants/employeeSex';
 import FormEmployee from '../../components/FormEmployee/FormEmployee';
 import CustomModal from '../../components/CustomModal/CustomModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { addEmployee, deleteEmployee, editEmployee, fetchEmployee } from '../../state/actions/employee';
+import SimplePaginator from '../../components/SimplePaginator';
+
+import { addEmployee, changeLimit, changePage, deleteEmployee, editEmployee, fetchEmployee } from '../../state/actions/employee';
+import SimplePaginLimit from '../../components/SimplePaginLimit/SimplePaginLimit';
 
 const Employee = () => {
 
-    const {employees} = useSelector(state=>state.employee);
+    const {employees, pages, page} = useSelector(state=>state.employee);
     const dispatch = useDispatch();
 
     const [selectEmployee, setSelectEmployee] = useState();
 
     const [createEmployeeModal, setCreateEmployeeModal] = useState(false);
     const [editEmployeeModal, setEditEmployeeModal] = useState(false);
-
-    useEffect(() => {
-        getEmployees();
-    }, []);
 
     const toggleCreateEmployeeModal = () => setCreateEmployeeModal(!createEmployeeModal);
     const toggleEditEmployeeModal = () => setEditEmployeeModal(!editEmployeeModal);
@@ -70,6 +67,15 @@ const Employee = () => {
         await dispatch(deleteEmployee(_id));
     };
 
+    const onPage = (p)=>{
+        dispatch(changePage(p));
+    };
+
+    const handlerChangeLimit = (l)=>{
+        //console.log('handlerChangeLimit = ', l);
+        dispatch(changeLimit(l));
+    };
+
     ////////////////// RENDER ///////////////////
 
     return (
@@ -100,6 +106,8 @@ const Employee = () => {
                     employee={{ name: '', sex: employeeSex[0], birthday: '', contacts: '', position: '', salary: '' }}
                 />
             </CustomModal>
+            <SimplePaginLimit arrLimit={[3,2,5,10,20]} onChange={handlerChangeLimit} />
+            <SimplePaginator onPage={onPage} pages={pages} forcePage={page}/>
             <Table bordered striped size='sm'>
                 <thead>
                     <tr>
