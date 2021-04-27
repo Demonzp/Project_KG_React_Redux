@@ -23,13 +23,6 @@ const Employee = () => {
     const toggleCreateEmployeeModal = () => setCreateEmployeeModal(!createEmployeeModal);
     const toggleEditEmployeeModal = () => setEditEmployeeModal(!editEmployeeModal);
 
-    ////////////////// HTTP REQUESTS ///////////////////
-
-    // GET
-    const getEmployees = () => {
-       dispatch(fetchEmployee);
-    };
-
     // POST
     const addEmployeeHandler = async (values) => {
         try {
@@ -72,7 +65,6 @@ const Employee = () => {
     };
 
     const handlerChangeLimit = (l)=>{
-        //console.log('handlerChangeLimit = ', l);
         dispatch(changeLimit(l));
     };
 
@@ -106,7 +98,7 @@ const Employee = () => {
                     employee={{ name: '', sex: employeeSex[0], birthday: '', contacts: '', position: '', salary: '' }}
                 />
             </CustomModal>
-            <SimplePaginLimit arrLimit={[3,2,5,10,20]} onChange={handlerChangeLimit} />
+            <SimplePaginLimit arrLimit={[2,3,5,10,20]} onChange={handlerChangeLimit} />
             <SimplePaginator onPage={onPage} pages={pages} forcePage={page}/>
             <Table bordered striped size='sm'>
                 <thead>

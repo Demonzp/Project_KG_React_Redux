@@ -77,14 +77,11 @@ export const deleteEmployee = (_id) => async (dispatch, getState) => {
         await getAxiosInstans().userAxios.delete('/employees/' + _id);
 
         if(page!==pages){
-            console.log('перегрузить все приложение');
             dispatch(fetchEmployee);
         }else{
             if(numEmployees-1<=0){
-                console.log('перегрузить на -1 страницу');
-                dispatch(changePage(page-1));
+                dispatch({type:CHANGE_PAGE, payload:page-1});
             }else{
-                console.log('обновить стейт без перегруза');
                 dispatch({ type: DELETE_EMPLOYEE, payload: _id });
             }
         }

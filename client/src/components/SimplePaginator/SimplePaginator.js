@@ -24,16 +24,13 @@ const SimplePaginator = ({ onPage = () => { }, pages, forcePage }) => {
             }
             return arr;
         });
-        if(pages>1){
+        if(pages>1 && !locationPage){
             history.push(`?page=${1}`);
         }
     }, [pages]);
 
     useEffect(() => {
-        //console.log('locationPage = ',locationPage);
         if (!locationPage) {
-            //history.push(`?page=${1}`);
-            //return;
             setPage(1);
         }else{
             setPage(Number(locationPage));
@@ -41,31 +38,22 @@ const SimplePaginator = ({ onPage = () => { }, pages, forcePage }) => {
     }, [location]);
 
     useEffect(() => {
-        //console.log('SimplePaginator page = ', page);
-        //console.log('page = ', page);
         setArrPages(() => {
             const arr = [];
             let correctEnd = 0;
             let correctStart = 0;
             let start = page - 2;
-            //console.log(start);
+
             if (start < 1) {
                 correctEnd = 1 + Math.abs(start);
                 start = 1;
-                //console.log('Math.abs(start) = ', Math.abs(start));
             }
-            //console.log('correctEnd = ', correctEnd);
-            //let start = page - 2>1?page-2:1;
+
             let end = page + 2 > countPages ? countPages : page + 2;
 
-            //console.log(end);
-            //console.log(end-start);
-
             if (end - start < 4 && correctEnd <= 0) {
-                //console.log('correctStart = ',end-start-3);
                 correctStart = 1 + Math.abs(end - start - 3);
             }
-            //start = end-start<3?start-1:start;
             end = end + correctEnd;
             start = start - correctStart <= 0 ? 1 : start - correctStart;
             let arrLength = end > countPages ? countPages : end;
@@ -75,26 +63,17 @@ const SimplePaginator = ({ onPage = () => { }, pages, forcePage }) => {
             return arr;
         });
 
-        //console.log('callback page');
-
         callback(page);
-        //calcState();
 
     }, [page]);
 
     useEffect(()=>{
-        console.log('forcePage = ', forcePage);
         if(forcePage){
             handlerClickPage(forcePage);
-            //history.push(`?page=${forcePage}`);
-            // if(forcePage===page){
-            //     callback(page);
-            // }
         }
     }, [forcePage]);
 
     const callback = (p) => {
-        //console.log('p = ', p);
         if (p <= 0) {
             return;
         }
@@ -124,7 +103,6 @@ const SimplePaginator = ({ onPage = () => { }, pages, forcePage }) => {
         if (p === page) {
             return;
         }
-        //console.log('handlerClickPage = ', p);
         history.push(`?page=${p}`);
     }
 

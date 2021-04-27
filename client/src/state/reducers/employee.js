@@ -3,7 +3,7 @@ const initialState = {
     page: null,
     pages: null,
     total: 0,
-    limit: 3
+    limit: 2
 }
 
 export const FETCH_EMLOYEE = 'FETCH_EMLOYEE';
@@ -33,7 +33,6 @@ const employee = (state = initialState, action) => {
         }
 
         case UPDATE_EMPLOYEE: {
-            //console.log('payload = ', payload);
             const index = state.employees.findIndex((el) => el._id === payload._id);
 
             return {
