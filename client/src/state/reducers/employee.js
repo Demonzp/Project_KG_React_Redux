@@ -62,7 +62,7 @@ const employee = (state = initialState, action) => {
         case CHANGE_LIMIT: {
             return {
                 ...state,
-                limit: payload,
+                limit: Number(payload),
                 page: 1
             }
         }

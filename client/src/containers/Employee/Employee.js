@@ -12,7 +12,7 @@ import SimplePaginLimit from '../../components/SimplePaginLimit/SimplePaginLimit
 
 const Employee = () => {
 
-    const {employees, pages, page} = useSelector(state=>state.employee);
+    const {employees, pages, page, limit} = useSelector(state=>state.employee);
     const dispatch = useDispatch();
 
     const [selectEmployee, setSelectEmployee] = useState();
@@ -98,7 +98,7 @@ const Employee = () => {
                     employee={{ name: '', sex: employeeSex[0], birthday: '', contacts: '', position: '', salary: '' }}
                 />
             </CustomModal>
-            <SimplePaginLimit arrLimit={[2,3,5,10,20]} onChange={handlerChangeLimit} />
+            <SimplePaginLimit arrLimit={[2,3,5,10,20]} onChange={handlerChangeLimit} forceLimit={limit} />
             <SimplePaginator onPage={onPage} pages={pages} forcePage={page}/>
             <Table bordered striped size='sm'>
                 <thead>
