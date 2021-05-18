@@ -19,6 +19,9 @@ const Signup = () => {
             await signup(values);
             history.push(RouteNames.signin);
         } catch (err) {
+            if(err.response){
+                alert(err.response.data);
+            }
             console.error(err);
         };
     };

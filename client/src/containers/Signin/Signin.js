@@ -16,6 +16,9 @@ const Signin = () => {
         try {
             await signin(values);
         } catch (err) {
+            if(err.response){
+                alert(err.response.data.message);
+            }
             console.error(err);
         };
     };
