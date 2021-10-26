@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import getAxiosInstans from '../services/axiosService';
+import { axiosService } from '../services/axiosService';
 import { checkAuth, setGuest, setToken } from '../state/actions/auth';
 
 let _isInit = false;
@@ -49,7 +49,7 @@ const useAuth = () => {
 
     const signup = async (data)=>{
         try {
-            await getAxiosInstans().guestAxios.post('/signup', data);
+            await axiosService.guestAxios.post('/signup', data);
         } catch (err) {
             throw err;
         };
@@ -57,7 +57,7 @@ const useAuth = () => {
 
     const signin = async (data) => {
         try {
-            const res = await getAxiosInstans().guestAxios.post('/signin', data);
+            const res = await axiosService.guestAxios.post('/signin', data);
             // Зберігаємо токен у local storage.
             localStorage.setItem('token', `Bearer ${res.data.signedToken}`);
             //теперь должны чекнуть локалСторе и затем сграпить данные по юзеру с сервера

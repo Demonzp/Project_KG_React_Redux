@@ -1,10 +1,11 @@
 import { AUTH_CHANGE, SET_TOKEN } from '../reducers/auth';
-import getAxiosInstans from '../../services/axiosService';
+//import getAxiosInstans from '../../services/axiosService';
+import { axiosService } from '../../services/axiosService';
 
 export const checkAuth = async (dispatch, getState) => {
     const token = getState().auth.token;
     try {
-        const res = await getAxiosInstans().userAxios.get('/user');
+        const res = await axiosService.userAxios.get('/user');
         dispatch({type:AUTH_CHANGE, payload:{user:res.data, token}});
     } catch (err) {
         console.error(err);
@@ -15,11 +16,11 @@ export const checkAuth = async (dispatch, getState) => {
 };
 
 export const setToken = (token) => (dispatch) => {
-    getAxiosInstans().setUserAxios(token);
+    axiosService.setUserAxios(token);
     dispatch({ type: SET_TOKEN, payload: token });
 };
 
 export const setGuest = (dispatch) => {
-    getAxiosInstans().setUserAxios(null);
+    axiosService.setUserAxios(null);
     dispatch({type:AUTH_CHANGE, payload:{user:null, token:null}});
 };

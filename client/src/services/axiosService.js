@@ -21,8 +21,4 @@ class AxiosService {
     }
 }
 
-const axiosService = new AxiosService();
-
-export default function getAxiosInstans(){
-    return axiosService;
-}
+export const axiosService = new AxiosService();
