@@ -1,5 +1,4 @@
 import { AUTH_CHANGE, SET_TOKEN } from '../reducers/auth';
-//import getAxiosInstans from '../../services/axiosService';
 import { axiosService } from '../../services/axiosService';
 
 export const checkAuth = async (dispatch, getState) => {
