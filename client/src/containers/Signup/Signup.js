@@ -9,7 +9,6 @@ import { signupValidation } from '../../validations/signupValidation';
 
 const Signup = () => {
 
-    // Отримуємо функцію реєстрації з контексту.
     const { signup } = useAuth();
 
     const history = useHistory();
