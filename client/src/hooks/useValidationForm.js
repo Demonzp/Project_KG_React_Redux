@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 
-// Cоздаём кастомный хук UseValidationForm.
 const UseValidationForm = (callback, initialState = {}, Validation, errorCallback = () => { }) => {
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // Создаём функцию изменения.
     const handleChange = (event) => {
         const { name, value } = event.target;
 
@@ -16,12 +14,10 @@ const UseValidationForm = (callback, initialState = {}, Validation, errorCallbac
         });
     };
 
-    // Создаём функцию отправки.
     const handleSubmit = (event) => {
         if (event) {
             event.preventDefault();
         }
-        // Обработчик ошибок.
         setErrors(Validation(values));
         setIsSubmitting(true);
     };
