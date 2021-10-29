@@ -8,10 +8,8 @@ import signinValidation from '../../validations/signinValidation';
 
 const Signin = () => {
 
-    // Отримуємо функцію авторизації з контексту.
     const { signin } = useAuth();
 
-    //Беремо дані з форми авторизації та спрямовуємо їх у функцію авторизації, яку раніше отримали з контексту.
     const submitUserHandler = async () => {
         try {
             await signin(values);
